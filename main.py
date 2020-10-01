@@ -48,16 +48,17 @@ p.start()
 common.send(nickname+" joined chat")
 try:
     while True:
-        x = input()
-        print("\033[A                      \033[A")
-        if x[0] == "/":
-            sp = x.split("/",1)[1] 
-            command.cmd_h(sp,p,nickname)
+        try:
+            x = input()
+            print("\033[A                      \033[A")
+            if x[0] == "/":
+                sp = x.split("/",1)[1] 
+                command.cmd_h(sp,p,nickname)
+                continue
+            common.send(x,nickname)
+        except KeyboardInterrupt:
+            print("\n")
             continue
-        common.send(x,nickname)
 except EOFError:
     p.kill()
     exit()
-except KeyboardInterrupt:
-    print("\n")
-    continue
